@@ -1,0 +1,100 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-image: url('https://i.pinimg.com/1200x/99/71/21/997121c6604554ddd47d126910d0f805.jpg');
+    background-position: center;
+    background-size: cover;
+    backdrop-filter: blur(8px);
+    min-height: 7vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px;
+    margin: 0;
+}
+
+.form-container {
+    max-width: 550px;
+    width: 90%;
+    background-color: #ffffff;
+    border-radius: 18px;
+    padding: 35px;
+    transition: transform 0.3s ease-in-out;
+    margin: 20px auto;
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 18px;
+    -ms-border-radius: 18px;
+    -o-border-radius: 18px;
+    -webkit-border-radius: 18px;
+    -webkit-transition: transform 0.3s ease-in-out;
+    -moz-transition: transform 0.3s ease-in-out;
+    -ms-transition: transform 0.3s ease-in-out;
+    -o-transition: transform 0.3s ease-in-out;
+}
+
+.form-container h2 {
+    font-size: 29px;
+    font-weight: 750;
+    margin-bottom: 24px;
+    text-align: center;
+    background: black; 
+    background-clip: text;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+display: block;
+    font-weight: 480;
+    color: black; 
+    margin: 6px;
+    text-align: left;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid grey;
+    border-radius: 8px; 
+    box-sizing: border-box;
+    font-size: 14px;   
+}
+
+.btn-group {
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-post {
+    background: blue;
+    border: none;
+}
+
+.btn-get {
+    background: red;
+    border: none;
+}
+        
+.btn-post, .btn-get {
+    display: inline-block;
+    padding: 12px 30px;
+    color: white;
+    font-weight: bold;
+    transition: all 0.3s;
+    border-radius: 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    font-size: 17px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.form-separator {
+    margin: 20px 0;
+    border: 0;
+}
