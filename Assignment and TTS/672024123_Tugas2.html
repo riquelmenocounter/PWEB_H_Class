@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Enak Banget</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('restoranfood.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            padding: 20px;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            font-family: 'Brush Script MT', cursive;
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        hr {
+            border: none;
+            border-top: 2px solid #333;
+            margin-bottom: 50px;
+            max-width: 100%;
+        }
+
+        .food-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .food-item {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.8);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .food-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.8);
+        }
+
+        .food-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+            object-fit: cover;
+            border-radius: 10px;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            color: #999;
+            margin-bottom: 15px;
+            border: 2px dashed #ccc;
+        }
+
+        .description {
+            text-align: center;
+        }
+
+        .food-name h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .food-price {
+            margin-bottom: 15px;
+        }
+
+        .food-price p {
+            font-size: 0.9em;
+            color: #777;
+            margin-bottom: 5px;
+        }
+
+        .food-price h5{
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .food-button button {
+            background: linear-gradient(135deg, #d47a35 0%, #c26825 100%);
+            transform: scale(1.05);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .food-button button:hover {
+            background-color: #555;
+            transform: scale(1.05);
+        }
+
+        .checkout-section {
+            background: #fff9f0;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .checkout-section h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .checkout-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .checkout-table thead {
+            background: linear-gradient(135deg, #f0d4b8 0%, #e8c4a8 100%);
+        }
+
+        .checkout-table th {
+            padding: 15px;
+            text-align: left;
+            font-size: 1.1em;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .checkout-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #555;
+        }
+
+        .checkout-table tbody tr:hover {
+           background: #fffaf5;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reset {
+            background: linear-gradient(135deg, #e8924a 0%, #d47a35 100%);
+            color: white;
+        }
+
+        .btn-reset:hover {
+            background: linear-gradient(135deg, #d47a35 0%, #c26825 100%);
+            transform: scale(1.05);
+        }
+
+        .btn-checkout {
+            background: linear-gradient(135deg, #e8924a 0%, #d47a35 100%);
+            color: white;
+        }
+        
+        .btn-checkout:hover {
+            background: linear-gradient(135deg, #d47a35 0%, #c26825 100%);
+            transform: scale(1.05);
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 30px;
+            font-style: italic;
+            color: #999;
+        }
+
+        .grand-total {
+            background: linear-gradient(135deg, #f0d46b 0%, #e8c4a8 100%);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: right;
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            margin-top: 15px;
+        }
+
+        .grand-total span {
+            color: #d4691e;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h1>Menu Lezat Banget</h1>
+    <hr>
+        
+    <div class="food-list"></div>
+    
+    <div class="checkout-section">
+        <h2>List Checkout Anda!</h2>
+        <table class="checkout-table">
+        <thead>
+            <tr>
+                <th>Nama</th>
+                <th>Harga</th>
+                <th>Qty</th>
+                <th>Total Harga</th>
+            </tr>
+        </thead>
+        <tbody id="checkoutBody">
+            <tr class="empty-cart">
+                <td colspan="4">Keranjang masih kosong.</td>
+            </tr>
+        </tbody>
+        </table>
+
+        <div class="grand-total">
+            Total Keseluruhan: Rp <span id="grandTotal">0</span>
+        </div>
+
+        <div class="button-container">
+            <button class="btn btn-reset" onclick="resetCart()">Reset</button>
+            <button class="btn btn-checkout" onclick="checkout()">Beli</button>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        let food = [
+            { name: "Gado-Gado", price: 9000, qty: 0, image: "Indonesische gado gado.jpeg" },
+            { name: "Lele Goreng", price: 7000, qty: 0, image: "Lele goreng (ada lele bakar juga).jpeg" },
+            { name: "Bakso", price: 10000, qty: 0, image: "download (10).jpeg" },
+            { name: "Indomie", price: 5000, qty: 0, image: "Indomie Noodles - Nitin Tandon Food Styling & Consulting.jpeg" },
+            { name: "Nasi Goreng", price: 10000, qty: 0, image: "nasgor.jpg" },
+            { name: "Mie Ayam", price: 8000, qty: 0, image: "mie ayam lezatt.jpg" },
+            { name: "Soto Ayam", price: 8000, qty: 0, image: "soto ayam enak.jpg" },
+            { name: "Sate Kambing", price: 9000, qty: 0, image: "sate kambing.jpg" }
+        ]
+
+        const fd_lst = document.querySelector(".food-list");
+        for (let i = 0; i < food.length; i++) {
+            fd_lst.innerHTML += `
+                <div class="food-item">
+                    <img src="${food[i].image}" alt="${food[i].name}" class="food-image">
+                    <div class="description">
+                        <div class="food-name">
+                            <h3>${food[i].name}</h3>
+                        </div>
+                        <div class="food-price">
+                            <p>Harga</p>
+                            <h5>Rp${food[i].price.toLocaleString('id-ID')}</h5>    
+                        </div>
+                        <div class="food-button" id="fd-${i}">
+                            <button onclick="buy(${i})">Beli Sekarang!</button>
+                        </div>    
+                    </div>
+                </div>
+            `;
+        }
+
+        function buy(i) {
+            const checkoutBody = document.getElementById("checkoutBody");
+            food[i].qty += 1;
+            const total = food[i].price * food[i].qty;
+            
+            const emptyMsg = checkoutBody.querySelector('.empty-cart');
+            if (emptyMsg) {
+                emptyMsg.remove();
+            }
+            
+            if (food[i].qty === 1) {
+                checkoutBody.innerHTML += `
+                <tr id="item-${i}">
+                    <td>${food[i].name}</td>
+                    <td>Rp${food[i].price.toLocaleString('id-ID')}</td>
+                    <td class="qty">${food[i].qty}</td>
+                    <td class="total">Rp${total.toLocaleString('id-ID')}</td>    
+                </tr>`;
+            } else {
+                const food_row = document.getElementById(`item-${i}`);
+                food_row.querySelector(".qty").textContent = food[i].qty;
+                food_row.querySelector(".total").textContent = `Rp${total.toLocaleString('id-ID')}`;
+            }
+            updateGrandTotal();
+        }
+
+        function updateGrandTotal(){
+            let grandTotal = 0;
+            for(let i = 0; i < food.length; i++){
+                grandTotal += food[i].price * food[i].qty;
+            }
+            document.getElementById("grandTotal").textContent = grandTotal.toLocaleString('id-ID');
+        }
+
+        function resetCart(){
+            for(let i = 0; i < food.length; i++){
+                food[i].qty = 0;
+            }
+            const checkoutBody = document.getElementById("checkoutBody");
+            checkoutBody.innerHTML = `
+                <tr class="empty-cart">
+                    <td colspan="4">Keranjang masih kosong.</td>
+                </tr>
+            `;
+            document.getElementById("grandTotal").textContent = "0";  
+        }
+
+
+        function checkout() {
+            let hasItems = false;
+            let orderSummary = "";
+
+            for(let i = 0; i < food.length; i++){
+                if(food[i].qty > 0){
+                    hasItems = true;
+                    orderSummary += `${food[i].name} x${food[i].qty} = Rp${(food[i].price * food[i].qty).toLocaleString('id-ID')}\n`;
+                }
+            }
+        
+            if(!hasItems){
+                alert("Keranjang masih kosong!");
+                return;
+            }
+
+            let grandTotal = 0;
+            for(let i = 0; i < food.length; i++){
+                grandTotal += food[i].price * food[i].qty;
+            }
+
+            let message = `Apakah Anda ingin melanjutkan pembelian?`;
+
+            if(confirm(message)){
+                alert("Pemesanan berhasil!\nTerima kasih udh beli!");
+                resetCart();
+            }else{
+                alert("Pemesanan dibatalkan!");
+            }
+        }
+    </script>
+    </div>
+</body>
+</html>

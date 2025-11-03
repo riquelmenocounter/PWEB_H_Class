@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahasiswa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e0c9a6 0%, #d4b896 100%);
+            padding: 20px;
+            min-height: 100vh;
+            background-image: url('univ.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: black;
+            font-size: 1.8em;
+            letter-spacing: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color:black;
+            font-weight: 600;
+            font-size: 0.94em;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 5px;
+            font-size: 1em;
+            background: white;
+            color: #4a4035;
+        }
+
+        input:focus,
+        select:focus {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 5px;
+            font-size: 1em;
+            background: white;
+            color: #4a4035;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 1em;
+            font-weight: 550;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            letter-spacing: 1px;
+        }
+
+        .btn-tambah {
+            background: blue;
+            color: white;
+        }
+
+        .btn-tambah:hover {
+            background: greenyellow;
+            transform: translateY(-2px);
+            color: black;
+        }
+
+        .btn-reset {
+            background: red;
+            color: white;
+        }
+
+        .btn-reset:hover {
+            background: brown;
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        h2 {
+            text-align: center;
+            color: black;
+            font-size: 1.8em;
+            letter-spacing: 2px;
+        }
+
+        .list-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .list-section.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mahasiswa-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .mahasiswa-card {
+            display: flex;
+            background: skyblue;
+            border: 2px;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .mahasiswa-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-image {
+            width: 200px;
+            background: grey;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+            color: white;
+            font-weight: 600;
+        }
+
+        .card-content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .card-content p {
+            margin-bottom: 10px;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .card-content strong {
+            color: white;
+            display: inline-block;
+            min-width: 100px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+            font-size: 1.1em;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .mahasiswa-list {
+                grid-template-columns: 1fr;
+            }
+
+            .mahasiswa-card {
+                flex-direction: column;
+            }
+
+            .card-image {
+                width: 100%;
+                height: 150px;
+                border-right: none;
+                border-bottom: 2px solid #c9b396;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Database Mahasiswa</h1>
+
+        <form id="form-mahasiswa">
+            <div class="form-group">
+                <label for="nama">Nama Lengkap</label>
+                <input type="text" id="nama" placeholder="Masukkan nama lengkap" required>
+            </div>
+
+            <div class="form-group">
+                <label for="nim">NIM</label>
+                <input type="text" id="nim" placeholder="Masukkan NIM" required>
+            </div>
+
+            <div class="form-group">
+                <label for="umur">Umur</label>
+                <input type="number" id="umur" placeholder="Masukkan umur" required min="0" max="100">
+            </div>
+
+            <div class="form-group">
+                <label for="tanggalLahir">Tanggal Lahir</label>
+                <input type="date" id="tanggalLahir" required>
+            </div>
+
+            <div class="form-group">
+                <label for="fakultas">Fakultas</label>
+                <select id="fakultas" required>
+                    <option value="Lainnya">SIlahkan Pilih Fakultas</option>
+                    <option value="FTI">Fakultas Teknologi Informasi</option>
+                    <option value="FEB">Fakultas Ekonomi dan Bisnis</option>
+                    <option value="FBS">Fakultas Bahasa dan Seni</option>
+                    <option value="FPSI">Fakultas Sosiologi</option>
+                    <option value="FKIP">Fakultas Keguruan dan Ilmu Pendidikan</option>
+                    <option value="FH">Fakultas Hukum</option>
+                    <option value="FTEOL">Fakultas Teologi</option>
+                    <option value="FK">Fakultas Kedokteran</option>
+                    <option value="FIK">Fakultas Ilmu Kesehatan</option>
+                    <option value="FBIO">Fakultas Biologi</option>
+                </select>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="btn-tambah">Tambah</button>
+                <button type="button" class="btn-reset" onclick="resetList()">Reset</button>
+            </div>
+        </form>
+
+        <br>
+        <h2>List Mahasiswa</h2>
+        <div id="listSection" class="list-section">
+            <div id="mahasiswaList" class="mahasiswa-list"></div>
+        </div>
+    </div>
+
+    <script>
+        let mahasiswaData = [];
+
+        function formatTanggal(tanggal) {
+            const date = new Date(tanggal);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1);
+            const day = String(date.getDate())
+            return `${day}-${month}-${year}`;
+        }
+
+        function displayMahasiswa() {
+            const listContainer = document.getElementById('mahasiswaList');
+            const listSection = document.getElementById('listSection');
+            
+            if (mahasiswaData.length === 0) {
+                listSection.classList.remove('show');
+                listContainer.innerHTML = '';
+                return;
+            }
+
+            listSection.classList.add('show');
+            listContainer.innerHTML = mahasiswaData.map(mhs => `
+                <div class="mahasiswa-card">
+                    <div class="card-image">
+                        Gambar Mahasiswa
+                    </div>
+                    <div class="card-content">
+                        <p><strong>Nama:</strong> ${mhs.nama}</p>
+                        <p><strong>NIM:</strong> ${mhs.nim}</p>
+                        <p><strong>Umur:</strong> ${mhs.umur}</p>
+                        <p><strong>Tanggal Lahir:</strong> ${mhs.tanggalLahir}</p>
+                        <p><strong>Fakultas:</strong> ${mhs.fakultas}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        document.getElementById('form-mahasiswa').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const mahasiswa = {
+                nama: document.getElementById('nama').value,
+                nim: document.getElementById('nim').value,
+                umur: document.getElementById('umur').value,
+                tanggalLahir: formatTanggal(document.getElementById('tanggalLahir').value),
+                fakultas: document.getElementById('fakultas').value
+            };
+
+            mahasiswaData.push(mahasiswa);
+            displayMahasiswa();
+
+            this.reset();
+            alert('Database mahasiswa berhasil ditambahkan brooo!');
+        });
+
+        function resetList() {
+            if (mahasiswaData.length === 0) {
+                alert('List wes kosong ki, baleni neh!');
+                return;
+            }
+            
+            if (confirm('Meh hapus data mahasiswa po ra?')) {
+                mahasiswaData = [];
+                displayMahasiswa();
+                alert('Wes dihapus ki!');
+            }
+        }
+
+        displayMahasiswa();
+    </script>
+</body>
+</html>
